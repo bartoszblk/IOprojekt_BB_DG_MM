@@ -1,4 +1,4 @@
-Skład zespołu z PS10:
+Skład zespołu z PS10 (GRUPA C):
 - Bartosz Białokoziewicz
 - Dawid Grygorowicz
 - Michał Mociak
@@ -23,3 +23,7 @@ Pan Nowak zwrócił się do firmy IT z zleceniem wdrożenia platformy do umawian
 System ma obsługiwać pełny cykl życia zlecenia: od rezerwacji, przez opcjonalną wstępną diagnostykę, realizację naprawy, oczekiwanie na części, po odbiór i wystawienie dokumentów. Klient po zalogowaniu widzi kalendarz z dostępnymi slotami, wybiera usługę z katalogu (np. wymiana oleju, diagnostyka hamulców, przegląd okresowy), a system szacuje czas pracy i rezerwuje stanowisko. Rezerwacja zostaje potwierdzona mailem i SMS-em z kodem QR do szybkiej odprawy. W dniu wizyty recepcjonista skanuje kod, przypisuje mechanika i uruchamia zlecenie. Mechanik aktualizuje stan, zgłasza ewentualne braki części, a system automatycznie informuje klienta o zmianach. Po zakończeniu naprawy generowany jest protokół z listą usług, zużytych części i kosztów. Klient może opłacić wizytę online (symulacja bramki) lub gotówką, a po odbiorze auta ma możliwość wystawienia opinii oraz zgłoszenia ewentualnej reklamacji gwarancyjnej.
 
 Obecny proces zostanie zastąpiony zintegrowanym narzędziem webowym z prostym interfejsem mobilnym dla mechaników. System nie wymaga na tym etapie pełnej integracji z zewnętrznymi hurtowniami ani systemami fakturowymi – wystarczy lokalna baza części z ręcznym uzupełnianiem stanów oraz sandbox płatniczy. Priorytetem jest niezawodność, czytelny przepływ informacji i możliwość stopniowej rozbudowy o moduły lojalnościowe czy zaawansowaną analitykę w kolejnych wersjach. Pan Nowak liczy, że wdrożenie systemu poprawi punktualność, zmniejszy liczbę nieporozumień z klientami i pozwoli warsztatowi obsłużyć więcej zleceń bez zwiększania zatrudnienia.
+
+
+do dodania:
+wyjazdy serwisowe (serwis wyjazdowy np wymiana kola na ulicy itp, sciaganie samochodu w razie awarii - laweta czyli przywożenie do serwisu)
