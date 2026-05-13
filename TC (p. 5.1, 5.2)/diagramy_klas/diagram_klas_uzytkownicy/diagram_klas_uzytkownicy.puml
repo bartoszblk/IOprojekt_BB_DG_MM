@@ -1,0 +1,65 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Ekipa {
+  +idEkipy: UUID
+  +nazwa: String
+  +dodajOperatora()
+  +usunOperatora()
+}
+
+class OperatorMyjki {
+  +uprawnieniaSprzetowe: String
+  +rozpocznijPrace()
+  +zakonczPrace()
+  +dodajZdjeciePo()
+}
+
+class Administrator {
+  +rola: String
+  +analizujStatystyki()
+  +zarzadzajMagazynem()
+  +rozpatrzReklamacje()
+}
+
+class PracownikTechniczny {
+  +specjalizacja: String
+  +wykonajPrzeglad()
+  +oznaczDoNaprawy()
+  +zwrocDoUzytku()
+}
+
+class Klient {
+  +adresDomyslny: String
+  +preferowanyKontakt: String
+  +zglosUsluge()
+  +oplacZadatek()
+  +zlozReklamacje()
+}
+
+class Pracownik {
+  +nrPracownika: String
+  +status: StatusPracy
+  +pobierzZadania()
+  +zglosDostepnosc()
+}
+
+class Użytkownik {
+  +id: UUID
+  +email: String
+  +telefon: String
+  +hasloHash: String
+  +zalogujSie()
+  +wylogujSie()
+  +zmienHaslo()
+}
+
+' Relacje i dziedziczenie
+Ekipa -- "1..*" OperatorMyjki
+OperatorMyjki --|> Pracownik
+Administrator --|> Pracownik
+PracownikTechniczny --|> Pracownik
+Klient --|> Użytkownik
+Pracownik --|> Użytkownik
+
+@enduml
