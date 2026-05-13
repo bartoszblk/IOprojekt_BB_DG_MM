@@ -1,0 +1,26 @@
+@startuml
+class Użytkownik { +id: UUID; +email: String; +telefon: String; +hasloHash: String; +rola: Rola; +zaloguj(); +wyloguj(); +zmienDane() }
+class Klient { +imie: String; +nazwisko: String; +adresDomyslny: Adres; +zglosUsluge(); +oplacZadatek(); +zglosReklamacje() }
+class Pracownik { +nrSluzbowy: String; +dzial: String; +aktywny: Boolean; +pobierzZadania() }
+class OperatorMyjki { +uprawnienia: String; +tabletId: String; +rozpocznijPrace(); +zakonczPrace(); +dodajZdjeciePo() }
+class Administrator { +poziomDostepu: int; +generujRaport(); +zarzadzajMagazynem() }
+class Zlecenie { +id: UUID; +status: StatusZlecenia; +kategoria: KategoriaObiektu; +powierzchniaM2: Decimal; +adres: Adres; +instrukcje: String; +potwierdz(); +odrzuc(); +przydzielOperatora(); +zamknij() }
+class Termin { +start: DateTime; +koniec: DateTime; +dostepny: Boolean; +zarezerwuj(); +zwolnij() }
+class Wycena { +kwotaNetto: Money; +vat: Decimal; +kwotaBrutto: Money; +waznaDo: DateTime; +oblicz(); +uniewaznij() }
+class Płatność { +id: UUID; +kwota: Money; +status: StatusPlatnosci; +operatorRef: String; +zainicjuj(); +potwierdz(); +anuluj() }
+class Zdjęcie { +id: UUID; +typ: TypZdjecia; +url: String; +dataDodania: DateTime; +opis: String; +zwaliduj() }
+class Abonament { +id: UUID; +okresOd: Date; +okresDo: Date; +czestotliwosc: String; +cena: Money; +aktywuj(); +przedluz(); +anuluj() }
+class Reklamacja { +id: UUID; +opis: String; +status: StatusReklamacji; +dataZgloszenia: DateTime; +terminOdpowiedzi: DateTime; +przyjmij(); +rozpatrz(); +zamknij() }
+Użytkownik <|-- Klient
+Użytkownik <|-- Pracownik
+Pracownik <|-- OperatorMyjki
+Pracownik <|-- Administrator
+Klient "1" -- "0..*" Zlecenie
+Zlecenie "1" -- "1" Termin
+Zlecenie "1" -- "1" Wycena
+Zlecenie "1" -- "0..1" Płatność
+Zlecenie "1" -- "1..*" Zdjęcie
+Zlecenie "1" -- "0..*" Reklamacja
+Klient "1" -- "0..*" Abonament
+OperatorMyjki "1" -- "0..*" Zlecenie
+@enduml

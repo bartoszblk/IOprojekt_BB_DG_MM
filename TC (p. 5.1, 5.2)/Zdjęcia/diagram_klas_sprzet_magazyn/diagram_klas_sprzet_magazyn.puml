@@ -1,0 +1,26 @@
+@startuml
+class MyjkaCiśnieniowa { +id: UUID; +nrSeryjny: String; +status: StatusMyjki; +lokalizacja: String; +oznaczNaMiejscu(); +zablokuj(); +oddajDoNaprawy(); +przywrocDoUzytku() }
+class ModułIoT { +id: UUID; +wersjaFirmware: String; +aktywny: Boolean; +pobierzOdczyt(); +wyslijAlarm() }
+class OdczytIoT { +czas: DateTime; +przeplywWodyLMin: Decimal; +temperaturaSilnikaC: Decimal; +alarm: Boolean; +czyPrzegrzanie() }
+class PrzeglądSerwisowy { +id: UUID; +data: Date; +wynik: String; +poziomUszkodzenia: int; +zapiszWynik(); +utworzNaprawe() }
+class Naprawa { +id: UUID; +opis: String; +status: StatusNaprawy; +koszt: Money; +rozpocznij(); +zakoncz() }
+class PrzydziałSprzętuZastępczego { +id: UUID; +od: DateTime; +do: DateTime; +powod: String; +aktywuj(); +zamknij() }
+class Detergent { +id: UUID; +nazwa: String; +stanLitry: Decimal; +progAlarmowy: Decimal; +zmniejszStan(); +uzupelnij(); +czyPonizejProgu() }
+class Magazyn { +id: UUID; +nazwa: String; +lokalizacja: String; +sprawdzStany(); +zarezerwujChemie() }
+class Dostawca { +id: UUID; +nazwa: String; +email: String; +czasDostawyDni: int; +przyjmijZapytanie() }
+class ZapytanieOfertowe { +id: UUID; +dataWyslania: DateTime; +status: StatusZapytania; +iloscLitrow: Decimal; +wygeneruj(); +wyslij(); +zamknij() }
+class RaportStatystyczny { +okresOd: Date; +okresDo: Date; +przychodBeton: Money; +przychodDrewno: Money; +przychodTynk: Money; +obliczPrzychody(); +obliczWydajnoscEkip(); +eksportujPDF() }
+class Zlecenie { +id: UUID; +status: StatusZlecenia; +kategoria: KategoriaObiektu; +zamknij() }
+MyjkaCiśnieniowa "1" -- "1" ModułIoT
+ModułIoT "1" -- "0..*" OdczytIoT
+MyjkaCiśnieniowa "1" -- "0..*" PrzeglądSerwisowy
+PrzeglądSerwisowy "1" -- "0..1" Naprawa
+MyjkaCiśnieniowa "1" -- "0..*" Naprawa
+MyjkaCiśnieniowa "1" -- "0..*" PrzydziałSprzętuZastępczego
+Magazyn "1" -- "1..*" Detergent
+Detergent "1" -- "0..*" ZapytanieOfertowe
+ZapytanieOfertowe "0..*" -- "1..*" Dostawca
+RaportStatystyczny ..> Zlecenie
+RaportStatystyczny ..> Detergent
+Zlecenie "0..*" -- "1" MyjkaCiśnieniowa
+@enduml
