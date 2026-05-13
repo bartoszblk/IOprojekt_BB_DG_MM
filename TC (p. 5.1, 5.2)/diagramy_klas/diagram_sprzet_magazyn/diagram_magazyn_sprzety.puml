@@ -1,0 +1,130 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 80
+
+class MyjkaCiśnieniowa {
+  +id: UUID
+  +nrSeryjny: String
+  +status: StatusMyjki
+  +lokalizacja: String
+  +dataOstatniegoPrzegladu: Date
+  +oznaczNaMiejscu()
+  +zablokuj()
+  +oddajDoNaprawy()
+  +przywrocDoUzytku()
+}
+
+class ModułIoT {
+  +id: UUID
+  +wersjaFirmware: String
+  +aktywny: Boolean
+  +pobierzOdczyt()
+  +wyslijAlarm()
+}
+
+class OdczytIoT {
+  +czas: DateTime
+  +przeplywWodyLMin: Decimal
+  +temperaturaSilnikaC: Decimal
+  +alarm: Boolean
+  +czyPrzegrzanie()
+}
+
+class PrzeglądSerwisowy {
+  +id: UUID
+  +data: Date
+  +wynik: String
+  +poziomUszkodzenia: int
+  +zapiszWynik()
+  +utworzNaprawe()
+}
+
+class Naprawa {
+  +id: UUID
+  +opis: String
+  +status: StatusNaprawy
+  +koszt: Money
+  +rozpocznij()
+  +zakoncz()
+}
+
+class PrzydziałSprzętuZastępczego {
+  +id: UUID
+  +od: DateTime
+  +do: DateTime
+  +powod: String
+  +aktywuj()
+  +zamknij()
+}
+
+class Magazyn {
+  +id: UUID
+  +nazwa: String
+  +lokalizacja: String
+  +sprawdzStany()
+  +zarezerwujChemie()
+}
+
+class Detergent {
+  +id: UUID
+  +nazwa: String
+  +stanLitry: Decimal
+  +progAlarmowy: Decimal
+  +zmniejszStan()
+  +uzupelnij()
+  +czyPonizejProgu()
+}
+
+class ZapytanieOfertowe {
+  +id: UUID
+  +dataWyslania: DateTime
+  +status: StatusZapytania
+  +iloscLitrow: Decimal
+  +wygeneruj()
+  +wyslij()
+  +zamknij()
+}
+
+class Dostawca {
+  +id: UUID
+  +nazwa: String
+  +email: String
+  +czasDostawyDni: int
+  +przyjmijZapytanie()
+}
+
+class RaportStatystyczny {
+  +okresOd: Date
+  +okresDo: Date
+  +przychodBeton: Money
+  +przychodDrewno: Money
+  +przychodTynk: Money
+  +obliczPrzychody()
+  +obliczWydajnoscEkip()
+  +eksportujPDF()
+}
+
+class Zlecenie {
+  +id: UUID
+  +status: StatusZlecenia
+}
+
+MyjkaCiśnieniowa "1" *-- "1" ModułIoT : posiada (kompozycja)
+ModułIoT "1" -- "0..*" OdczytIoT : generuje
+MyjkaCiśnieniowa "1" -- "0..*" PrzeglądSerwisowy : przechodzi
+PrzeglądSerwisowy ..> Naprawa : inicjuje (dependency)
+MyjkaCiśnieniowa "1" -- "0..*" Naprawa : podlega
+Naprawa "1" -- "0..1" PrzydziałSprzętuZastępczego : wymaga
+
+Magazyn "1" o-- "1..*" Detergent : przechowuje (agregacja)
+Detergent ..> ZapytanieOfertowe : wyzwala przy braku
+ZapytanieOfertowe "0..*" -- "1" Dostawca : wysyłane do
+
+Zlecenie "0..*" -- "1" MyjkaCiśnieniowa : wykorzystuje
+Zlecenie "0..*" -- "1" Detergent : zużywa
+RaportStatystyczny ..> Zlecenie : analizuje dane
+RaportStatystyczny ..> Detergent : analizuje zużycie
+
+@enduml

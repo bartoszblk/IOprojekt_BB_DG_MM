@@ -1,0 +1,271 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 50
+
+package "Zarządzanie Użytkownikami (Aktorzy)" {
+  abstract class Użytkownik {
+    +id: UUID
+    +email: String
+    +telefon: String
+    +hasloHash: String
+    +zalogujSie()
+    +wylogujSie()
+    +zmienHaslo()
+  }
+  class Klient {
+    +imie: String
+    +nazwisko: String
+    +adresDomyslny: String
+    +preferowanyKontakt: String
+    +zglosUsluge()
+    +oplacZadatek()
+    +zlozReklamacje()
+  }
+  abstract class Pracownik {
+    +nrPracownika: String
+    +status: StatusPracy
+    +pobierzZadania()
+    +zglosDostepnosc()
+  }
+  class OperatorMyjki {
+    +uprawnieniaSprzetowe: String
+    +tabletId: String
+    +rozpocznijPrace()
+    +zakonczPrace()
+    +dodajZdjeciePo()
+  }
+  class Administrator {
+    +rola: String
+    +analizujStatystyki()
+    +zarzadzajMagazynem()
+    +rozpatrzReklamacje()
+    +generujRaport()
+  }
+  class PracownikTechniczny {
+    +specjalizacja: String
+    +wykonajPrzeglad()
+    +oznaczDoNaprawy()
+    +zwrocDoUzytku()
+  }
+  class Ekipa {
+    +idEkipy: UUID
+    +nazwa: String
+    +dodajOperatora()
+    +usunOperatora()
+  }
+}
+
+package "Obsługa Zleceń i Finanse" {
+  class Zlecenie {
+    +id: UUID
+    +status: StatusZlecenia
+    +kategoria: KategoriaObiektu
+    +powierzchniaM2: Decimal
+    +adres: Adres
+    +instrukcje: String
+    +utworzono: DateTime
+    +potwierdz()
+    +odrzuc()
+    +przydzielOperatora()
+    +zamknij()
+  }
+  class Termin {
+    +start: DateTime
+    +koniec: DateTime
+    +strefa: String
+    +dostepny: Boolean
+    +zarezerwuj()
+    +zwolnij()
+  }
+  class Wycena {
+    +kwotaNetto: Money
+    +kwotaBrutto: Money
+    +vat: Decimal
+    +waznaDo: DateTime
+    +oblicz()
+    +uniewaznij()
+  }
+  class Płatność {
+    +id: UUID
+    +kwota: Money
+    +status: StatusPlatnosci
+    +operatorRef: String
+    +zainicjuj()
+    +potwierdz()
+    +anuluj()
+  }
+  class Zdjęcie {
+    +id: UUID
+    +typ: TypZdjecia
+    +url: String
+    +dataDodania: DateTime
+    +opis: String
+    +zwaliduj()
+    +oznaczJakoGlowne()
+  }
+  class Reklamacja {
+    +id: UUID
+    +opis: String
+    +status: StatusReklamacji
+    +dataZgloszenia: DateTime
+    +terminOdpowiedzi: DateTime
+    +przyjmij()
+    +rozpatrz()
+    +zamknij()
+  }
+  class Abonament {
+    +id: UUID
+    +okresOd: Date
+    +okresDo: Date
+    +czestotliwosc: String
+    +cena: Money
+    +aktywny: Boolean
+    +aktywuj()
+    +przedluz()
+    +anuluj()
+  }
+}
+
+package "Sprzęt i Moduły IoT" {
+  class MyjkaCiśnieniowa {
+    +id: UUID
+    +nrSeryjny: String
+    +status: StatusMyjki
+    +lokalizacja: String
+    +dataOstatniegoPrzegladu: Date
+    +oznaczNaMiejscu()
+    +zablokuj()
+    +oddajDoNaprawy()
+    +przywrocDoUzytku()
+  }
+  class ModułIoT {
+    +id: UUID
+    +wersjaFirmware: String
+    +aktywny: Boolean
+    +pobierzOdczyt()
+    +wyslijAlarm()
+  }
+  class OdczytIoT {
+    +czas: DateTime
+    +przeplywWodyLMin: Decimal
+    +temperaturaSilnikaC: Decimal
+    +alarm: Boolean
+    +czyPrzegrzanie()
+  }
+  class PrzeglądSerwisowy {
+    +id: UUID
+    +data: Date
+    +wynik: String
+    +poziomUszkodzenia: int
+    +zapiszWynik()
+    +utworzNaprawe()
+  }
+  class Naprawa {
+    +id: UUID
+    +opis: String
+    +status: StatusNaprawy
+    +koszt: Money
+    +rozpocznij()
+    +zakoncz()
+  }
+  class PrzydziałSprzętuZastępczego {
+    +id: UUID
+    +od: DateTime
+    +do: DateTime
+    +powod: String
+    +aktywuj()
+    +zamknij()
+  }
+}
+
+package "Gospodarka Magazynowa i Raporty" {
+  class Magazyn {
+    +id: UUID
+    +nazwa: String
+    +lokalizacja: String
+    +sprawdzStany()
+    +zarezerwujChemie()
+  }
+  class Detergent {
+    +id: UUID
+    +nazwa: String
+    +stanLitry: Decimal
+    +progAlarmowy: Decimal
+    +zmniejszStan()
+    +uzupelnij()
+    +czyPonizejProgu()
+  }
+  class ZapytanieOfertowe {
+    +id: UUID
+    +dataWyslania: DateTime
+    +status: StatusZapytania
+    +iloscLitrow: Decimal
+    +wygeneruj()
+    +wyslij()
+    +zamknij()
+  }
+  class Dostawca {
+    +id: UUID
+    +nazwa: String
+    +email: String
+    +czasDostawyDni: int
+    +przyjmijZapytanie()
+  }
+  class RaportStatystyczny {
+    +okresOd: Date
+    +okresDo: Date
+    +przychodBeton: Money
+    +przychodDrewno: Money
+    +przychodTynk: Money
+    +obliczPrzychody()
+    +obliczWydajnoscEkip()
+    +eksportujPDF()
+  }
+}
+
+' Dziedziczenie Aktorów
+Klient -up-|> Użytkownik
+Pracownik -up-|> Użytkownik
+OperatorMyjki -up-|> Pracownik
+Administrator -up-|> Pracownik
+PracownikTechniczny -up-|> Pracownik
+Ekipa o-- "1..*" OperatorMyjki
+
+' Struktura Zlecenia
+Zlecenie "1" *-- "1" Termin : zawiera
+Zlecenie "1" *-- "1" Wycena : posiada
+Zlecenie "1" o-- "0..1" Płatność : zadatek
+Zlecenie "1" o-- "1..*" Zdjęcie : dokumentuje
+Zlecenie "1" o-- "0..*" Reklamacja : zgłoszenie
+
+' Struktura Sprzętu
+MyjkaCiśnieniowa "1" *-- "1" ModułIoT : posiada (kompozycja)
+ModułIoT "1" -- "0..*" OdczytIoT : generuje
+MyjkaCiśnieniowa "1" -- "0..*" PrzeglądSerwisowy : przechodzi
+PrzeglądSerwisowy ..> Naprawa : inicjuje
+MyjkaCiśnieniowa "1" -- "0..*" Naprawa : podlega
+Naprawa "1" -- "0..1" PrzydziałSprzętuZastępczego : wymaga
+
+' Magazyn
+Magazyn "1" o-- "1..*" Detergent : przechowuje
+Detergent ..> ZapytanieOfertowe : wyzwala przy braku
+ZapytanieOfertowe "0..*" -- "1" Dostawca : adresowane do
+
+' Aktorzy -> Zlecenia
+Klient "1" -- "0..*" Zlecenie : składa
+Klient "1" -- "0..*" Abonament : wykupuje
+OperatorMyjki "1" -- "0..*" Zlecenie : realizuje
+
+' Aktorzy -> Inne Moduły
+Administrator -- Magazyn : zarządza
+
+' Zlecenia -> Sprzęt i Magazyn
+Zlecenie "0..*" -- "1" MyjkaCiśnieniowa : wykorzystuje
+Zlecenie "0..*" -- "1" Detergent : zużywa
+
+' Raporty
+RaportStatystyczny ..> Zlecenie : analizuje dane
+RaportStatystyczny ..> Detergent : analizuje zużycie
+@enduml

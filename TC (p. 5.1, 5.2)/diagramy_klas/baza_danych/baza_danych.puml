@@ -1,0 +1,166 @@
+@startuml
+hide circle
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 60
+
+entity "Uzytkownik" as Uzytkownik {
+  * id_uzytkownika : UUID <<PK>>
+  --
+  email : VARCHAR
+  haslo_hash : VARCHAR
+  telefon : VARCHAR
+  rola : VARCHAR
+}
+
+entity "Klient" as Klient {
+  * id_klienta : UUID <<PK>>
+  --
+  id_uzytkownika : UUID <<FK>>
+  imie : VARCHAR
+  nazwisko : VARCHAR
+  adres_domyslny : VARCHAR
+}
+
+entity "Ekipa" as Ekipa {
+  * id_ekipy : UUID <<PK>>
+  --
+  nazwa : VARCHAR
+}
+
+entity "Operator" as Operator {
+  * id_operatora : UUID <<PK>>
+  --
+  id_uzytkownika : UUID <<FK>>
+  id_ekipy : UUID <<FK>>
+  imie : VARCHAR
+  nazwisko : VARCHAR
+  uprawnienia : VARCHAR
+}
+
+entity "Detergent" as Detergent {
+  * id_detergentu : UUID <<PK>>
+  --
+  nazwa : VARCHAR
+  stan_litry : DECIMAL
+  prog_alarmowy : DECIMAL
+}
+
+entity "Dostawca" as Dostawca {
+  * id_dostawcy : UUID <<PK>>
+  --
+  nazwa : VARCHAR
+  email : VARCHAR
+  czas_dostawy_dni : INT
+}
+
+entity "ZapytanieOfertowe" as ZapytanieOfertowe {
+  * id_zapytania : UUID <<PK>>
+  --
+  id_detergentu : UUID <<FK>>
+  id_dostawcy : UUID <<FK>>
+  status : VARCHAR
+  data_wyslania : DATETIME
+  ilosc_litrow : DECIMAL
+}
+
+entity "Myjka" as Myjka {
+  * id_myjki : UUID <<PK>>
+  --
+  nr_seryjny : VARCHAR
+  status : VARCHAR
+  lokalizacja : VARCHAR
+}
+
+entity "OdczytIoT" as OdczytIoT {
+  * id_odczytu : UUID <<PK>>
+  --
+  id_myjki : UUID <<FK>>
+  czas : DATETIME
+  temperatura : DECIMAL
+  przeplyw : DECIMAL
+  alarm : BOOLEAN
+}
+
+entity "PrzegladSerwisowy" as PrzegladSerwisowy {
+  * id_przegladu : UUID <<PK>>
+  --
+  id_myjki : UUID <<FK>>
+  data : DATE
+  wynik : VARCHAR
+  poziom_uszkodzenia : INT
+}
+
+entity "Zlecenie" as Zlecenie {
+  * id_zlecenia : UUID <<PK>>
+  --
+  id_klienta : UUID <<FK>>
+  id_ekipy : UUID <<FK>>
+  id_myjki : UUID <<FK>>
+  status : VARCHAR
+  kategoria : VARCHAR
+  typ_powierzchni : VARCHAR
+  powierzchnia_m2 : DECIMAL
+  termin_start : DATETIME
+  cena_brutto : DECIMAL
+  adres : VARCHAR
+}
+
+entity "Platnosc" as Platnosc {
+  * id_platnosci : UUID <<PK>>
+  --
+  id_zlecenia : UUID <<FK>>
+  kwota : DECIMAL
+  status : VARCHAR
+  data_transakcji : DATETIME
+}
+
+entity "Zdjecie" as Zdjecie {
+  * id_zdjecia : UUID <<PK>>
+  --
+  id_zlecenia : UUID <<FK>>
+  typ : VARCHAR
+  url_pliku : VARCHAR
+  data_dodania : DATETIME
+}
+
+entity "Reklamacja" as Reklamacja {
+  * id_reklamacji : UUID <<PK>>
+  --
+  id_zlecenia : UUID <<FK>>
+  opis : TEXT
+  status : VARCHAR
+  data_zgloszenia : DATETIME
+}
+
+entity "Abonament" as Abonament {
+  * id_abonamentu : UUID <<PK>>
+  --
+  id_klienta : UUID <<FK>>
+  okres_od : DATE
+  okres_do : DATE
+  status : VARCHAR
+  czestotliwosc : VARCHAR
+}
+
+Uzytkownik "1" -- "1" Klient
+Uzytkownik "1" -- "1" Operator
+
+Ekipa "1" -- "N" Operator
+Ekipa "1" -- "N" Zlecenie
+
+Detergent "1" -- "N" ZapytanieOfertowe
+Dostawca "1" -- "N" ZapytanieOfertowe
+
+Myjka "1" -- "N" OdczytIoT
+Myjka "1" -- "N" PrzegladSerwisowy
+Myjka "1" -- "N" Zlecenie
+
+Klient "1" -- "N" Zlecenie
+Klient "1" -- "N" Abonament
+
+Zlecenie "1" -- "1" Platnosc
+Zlecenie "1" -- "N" Zdjecie
+Zlecenie "1" -- "N" Reklamacja
+
+@enduml

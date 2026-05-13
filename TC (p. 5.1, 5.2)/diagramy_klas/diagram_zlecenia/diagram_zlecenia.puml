@@ -1,0 +1,133 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 100
+skinparam ranksep 100
+
+abstract class Użytkownik {
+  +id: UUID
+  +email: String
+  +telefon: String
+  +hasloHash: String
+  +zalogujSie()
+  +wylogujSie()
+  +zmienHaslo()
+}
+
+class Klient {
+  +imie: String
+  +nazwisko: String
+  +adresDomyslny: String
+  +preferowanyKontakt: String
+  +zglosUsluge()
+  +oplacZadatek()
+  +zlozReklamacje()
+}
+
+abstract class Pracownik {
+  +nrPracownika: String
+  +status: StatusPracy
+  +pobierzZadania()
+  +zglosDostepnosc()
+}
+
+class OperatorMyjki {
+  +uprawnieniaSprzetowe: String
+  +tabletId: String
+  +rozpocznijPrace()
+  +zakonczPrace()
+  +dodajZdjeciePo()
+}
+
+class Zlecenie {
+  +id: UUID
+  +status: StatusZlecenia
+  +kategoria: KategoriaObiektu
+  +powierzchniaM2: Decimal
+  +adres: Adres
+  +instrukcje: String
+  +utworzono: DateTime
+  +potwierdz()
+  +odrzuc()
+  +przydzielOperatora()
+  +zamknij()
+}
+
+class Termin {
+  +start: DateTime
+  +koniec: DateTime
+  +strefa: String
+  +dostepny: Boolean
+  +zarezerwuj()
+  +zwolnij()
+}
+
+class Wycena {
+  +kwotaNetto: Money
+  +kwotaBrutto: Money
+  +vat: Decimal
+  +waznaDo: DateTime
+  +oblicz()
+  +uniewaznij()
+}
+
+class Płatność {
+  +id: UUID
+  +kwota: Money
+  +status: StatusPlatnosci
+  +operatorRef: String
+  +zainicjuj()
+  +potwierdz()
+  +anuluj()
+}
+
+class Zdjęcie {
+  +id: UUID
+  +typ: TypZdjecia
+  +url: String
+  +dataDodania: DateTime
+  +opis: String
+  +zwaliduj()
+  +oznaczJakoGlowne()
+}
+
+class Reklamacja {
+  +id: UUID
+  +opis: String
+  +status: StatusReklamacji
+  +dataZgloszenia: DateTime
+  +terminOdpowiedzi: DateTime
+  +przyjmij()
+  +rozpatrz()
+  +zamknij()
+}
+
+class Abonament {
+  +id: UUID
+  +okresOd: Date
+  +okresDo: Date
+  +czestotliwosc: String
+  +cena: Money
+  +aktywny: Boolean
+  +aktywuj()
+  +przedluz()
+  +anuluj()
+}
+
+Klient -up-|> Użytkownik
+Pracownik -up-|> Użytkownik
+OperatorMyjki -up-|> Pracownik
+
+Klient "1" -- "0..*" Zlecenie : składa
+Klient "1" -- "0..*" Abonament : wykupuje
+
+OperatorMyjki "1" -- "0..*" Zlecenie : realizuje
+
+Zlecenie "1" *-- "1" Termin : zawiera
+Zlecenie "1" *-- "1" Wycena : posiada
+
+Zlecenie "1" o-- "0..1" Płatność : zadatek
+Zlecenie "1" o-- "1..*" Zdjęcie : dokumentuje
+Zlecenie "1" o-- "0..*" Reklamacja : zgłoszenie
+
+@enduml

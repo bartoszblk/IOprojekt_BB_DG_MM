@@ -1,0 +1,67 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+abstract class Użytkownik {
+  +id: UUID
+  +email: String
+  +telefon: String
+  +hasloHash: String
+  +zalogujSie()
+  +wylogujSie()
+  +zmienHaslo()
+}
+
+class Klient {
+  +adresDomyslny: String
+  +preferowanyKontakt: String
+  +zglosUsluge()
+  +oplacZadatek()
+  +zlozReklamacje()
+}
+
+class Pracownik {
+  +nrPracownika: String
+  +status: StatusPracy
+  +pobierzZadania()
+  +zglosDostepnosc()
+}
+
+class OperatorMyjki {
+  +uprawnieniaSprzetowe: String
+  +tabletId: String
+  +rozpocznijPrace()
+  +zakonczPrace()
+  +dodajZdjeciePo()
+}
+
+class Administrator {
+  +rola: String
+  +analizujStatystyki()
+  +zarzadzajMagazynem()
+  +rozpatrzReklamacje()
+  +generujRaport()
+}
+
+class PracownikTechniczny {
+  +specjalizacja: String
+  +wykonajPrzeglad()
+  +oznaczDoNaprawy()
+  +zwrocDoUzytku()
+}
+
+class Ekipa {
+  +idEkipy: UUID
+  +nazwa: String
+  +dodajOperatora()
+  +usunOperatora()
+}
+
+Klient -up-|> Użytkownik
+Pracownik -up-|> Użytkownik
+OperatorMyjki -up-|> Pracownik
+Administrator -up-|> Pracownik
+PracownikTechniczny -up-|> Pracownik
+
+Ekipa o-- "1..*" OperatorMyjki : agregacja (skład ekipy)
+@enduml
