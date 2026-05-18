@@ -234,7 +234,7 @@ PracownikTechniczny -up-|> Pracownik
 Ekipa o-- "1..*" OperatorMyjki
 
 ' Struktura Zlecenia
-Zlecenie "1" *-- "1" Termin : zawiera
+Zlecenie "0..*" -- "1" Termin : zajmuje
 Zlecenie "1" *-- "1" Wycena : posiada
 Zlecenie "1" o-- "0..1" Płatność : zadatek
 Zlecenie "1" o-- "1..*" Zdjęcie : dokumentuje
