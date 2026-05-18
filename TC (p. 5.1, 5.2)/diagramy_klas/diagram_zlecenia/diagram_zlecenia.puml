@@ -123,7 +123,7 @@ Klient "1" -- "0..*" Abonament : wykupuje
 
 OperatorMyjki "1" -- "0..*" Zlecenie : realizuje
 
-Zlecenie "1" *-- "1" Termin : zawiera
+Zlecenie "0..*" -- "1" Termin : zajmuje
 Zlecenie "1" *-- "1" Wycena : posiada
 
 Zlecenie "1" o-- "0..1" Płatność : zadatek
