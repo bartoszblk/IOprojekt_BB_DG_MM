@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>100</x>
+      <y>200</y>
+      <w>270</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;node&gt;&gt;
+Warstwa Prezentacji
+(Front-end)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>530</x>
+      <y>200</y>
+      <w>480</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;node&gt;&gt;
+Serwer Centralny
+(Klaster 10x Amiga 500)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>130</x>
+      <y>490</y>
+      <w>270</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;node&gt;&gt;
+Myjki Ciśnieniowe</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>680</x>
+      <y>560</y>
+      <w>330</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;node&gt;&gt;
+Serwer Bazodanowy
+(Raspberry Pi 4B)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>110</x>
+      <y>270</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Portal Klienta (WWW)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>110</x>
+      <y>320</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Panel Administratora WWW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>110</x>
+      <y>370</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Aplikacja OperatorManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>540</x>
+      <y>270</y>
+      <w>450</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Logika Biznesowa (API)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>140</x>
+      <y>540</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Moduł IoT (Telemetria)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>780</x>
+      <y>310</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>P2
+--
+Obsługa zleceń i finanse
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>780</x>
+      <y>380</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>P4
+--
+Sprzęt i moduły IoT
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>560</x>
+      <y>380</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>P3
+--
+Gospodarka magazynowa
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>560</x>
+      <y>310</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>P1
+--
+Zarządzanie użytkownikami
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>690</x>
+      <y>630</y>
+      <w>90</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>// Text Element
+// DB Symbol
+
+Baza danych
+_umletcode=
+fg='black';
+bg='#222222';
+drawArc(0,0,width,height*2/5,0,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='bg';
+drawArc(0,0,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+fg='#929292';
+bg='#222222';
+drawRectangle(0,(height+0.5)/5,width,(height)*3/5-1)  //Parameters (x, y, width, height)
+fg='black'
+drawLine(0,height/5,0,height*4/5) //Parameters (x1, y1, x2, y2)
+drawLine(width,height/5,width,height*4/5) //Parameters (x1, y1, x2, y2)
+bg='bg';
+drawArc(0,height*1/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+drawArc(0,height*2/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+bg='#222222'
+drawArc(0,height*3/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>640</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+Bramka płatności</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>720</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+Platforma dostawcy</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>270</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HTTP / REST
+</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>370</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HTTP / REST
+</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>320</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HTTP / REST
+</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>460</y>
+      <w>220</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+MQTT / TCP
+</panel_attributes>
+    <additional_attributes>200.0;10.0;200.0;100.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>460</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+API / Autoryzacja
+</panel_attributes>
+    <additional_attributes>10.0;210.0;80.0;210.0;80.0;160.0;240.0;160.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>460</y>
+      <w>300</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+API / Zapytania ofertowe
+</panel_attributes>
+    <additional_attributes>10.0;290.0;110.0;290.0;110.0;220.0;260.0;220.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>460</y>
+      <w>160</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+SQL</panel_attributes>
+    <additional_attributes>10.0;200.0;110.0;200.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>790</x>
+      <y>640</y>
+      <w>60</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>IOdczyt</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>840</x>
+      <y>700</y>
+      <w>60</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>IZapis</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>640</y>
+      <w>60</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>700</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>460</y>
+      <w>150</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+SQL</panel_attributes>
+    <additional_attributes>10.0;260.0;100.0;260.0;100.0;10.0</additional_attributes>
+  </element>
+</diagram>
